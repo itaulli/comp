@@ -5,13 +5,13 @@ Description:
 """
 import matplotlib.pyplot as plt
 
-def plot(x):
+def plot(file_in, file_out):
 
     temp = []
     number = []
     xlist = []
     ylist = []
-    file = open(x)
+    file = open(file_in)
 
     for line in file:
     
@@ -36,4 +36,4 @@ def plot(x):
     plt.plot(xlist,ylist)
     ax = plt.gca()
     ax.set_title('fig. 1 (Taulli)')
-    plt.savefig('fig1.pdf')
+    plt.savefig(file_out)
