@@ -1,7 +1,7 @@
 """
 Created on Thu Jan 25 14:31:46 2018
 Author: Ian Taulli
-Discription:
+Discription: estimates the largest float, the smallest positive float, and the machine epsilon
 """
 import numpy as np
 import matplotlib.pyplot as plt
@@ -52,7 +52,7 @@ except:
 
 n = 10.0**(k-0.0001)
 
-print("max float estimate",n)
+print("max float estimate:",n)
 
 #%% Finds the smallest float64 number
 
@@ -96,4 +96,43 @@ except:
 
 n = 10.0**(-(p-0.0001))
 
-print("min float estimate",n)
+print("min float estimate:",n)
+
+#%% Finds the machine precision
+
+i, j = 0, 0
+
+for i in np.arange(1,20,0.1):
+    
+    j = 10.0**(-i)
+    
+    if 1.0 == 1.0 + j:
+        break
+
+for var in np.arange(i-1,i,0.0001):
+    
+    j = 10.0**(-var)
+    
+    if 1.0 == 1.0 + j:
+        break
+
+n = 10**(-(var-0.0001))
+
+print("machine precision estimate:",n)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
