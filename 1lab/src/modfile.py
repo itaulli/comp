@@ -10,4 +10,4 @@ def modtest(x):
     j=0
     for i in range(x+1):
         j+=i
-    print(j)
+    return j
