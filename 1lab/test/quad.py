@@ -6,10 +6,10 @@ Description: creates a particular instance of qsolve
 import numpy as np
 import qsolve as q
 
-# the coefficents for (x-(10**10)*(x-(10**-10)
+# the coefficents for (x-(10**10))*(x-1)
 a = 1.0
-b = -(10.0**20+1)/(10**10)
-c = 1
+b =-(10.0**10+1.0)
+c = 10.0**10
 
 ans1,ans2 = q.standard(a,b,c)
 ans3,ans4 = q.modified(a,b,c)
