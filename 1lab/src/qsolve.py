@@ -6,8 +6,8 @@ Description: solves the quadriatic equation in two different ways (excersise in 
 import numpy as np
 
 def standard(a,b,c):
-    x1 = 1/(2*a)*(-b+np.sqrt(b**2-4*a*c))
-    x2 = 1/(2*a)*(-b-np.sqrt(b**2-4*a*c))
+    x1 = 1/(2*a)*(-b-np.sqrt(b**2-4*a*c))
+    x2 = 1/(2*a)*(-b+np.sqrt(b**2-4*a*c))
     return x1, x2
 
 def modified(a,b,c):
