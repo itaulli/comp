@@ -9,8 +9,10 @@ int main()
     {
         old_sum = sum;
         sum += static_cast<double>(1)/k;
-	if (k = 1000000) {std::cout <<
-
+	if (k % 1000000 == 0)
+	{
+		std::cout << "k is " << k << ", sum is " << sum << '\n';	
+	}
     }
 
     std::cout << "k is " << k << ", sum is " << sum << '\n';
