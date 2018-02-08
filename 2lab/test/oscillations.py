@@ -26,7 +26,7 @@ elif power == 8.0:
     timeLimit = 10*oscillationPeriod
 
 # The tuple of ODE algorithms that we are going to use
-odeSolvers = (EulerSolver, RK2, RK4)
+odeSolvers = (EulerSolver, EulerCromer, RK2, RK4)
 
 # Run for a set of different time deltas.
 # We will display them using different colors.
