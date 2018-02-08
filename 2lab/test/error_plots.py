@@ -1,3 +1,11 @@
+"""
+Created: Wed Feb  7 21:10:00 2018
+Author: Ian Taulli
+Description:
+"""
+import numpy as np
+import matplotlib.pyplot as plt
+
 #!/usr/bin/env python
 
 from cpode import *
@@ -7,9 +15,10 @@ from RK2 import *
 from part2force import *
 from part2functions import *
 import math
+import numpy as np
 
 # Prepare the force acting on the test mass (m = 1.0)
-power = 8.0
+power = 2.0
 spring_constant = 1.0
 force = Pforce(power, spring_constant)
 
@@ -26,48 +35,32 @@ elif power == 8.0:
     timeLimit = 10*oscillationPeriod
 
 # The tuple of ODE algorithms that we are going to use
-odeSolvers = (EulerSolver, RK2, RK4)
+odeSolvers = (EulerSolver, EulerCromer, RK2, RK4, RK6)
+solvercolor = ('r', 'b', 'g', 'm', 'c', 'b')
 
 # Run for a set of different time deltas.
 # We will display them using different colors.
 # Run "help(colors)" at the prompt to see
 # the inctructions on the use of colors.
-timedeltas = (1e-4, 1e-5)
-plotcolors = ('orange', 'green')
+timedeltas = np.linspace(1e-6,1e-2,10)
 
 # Cycle over the ODE algorithms
 for algorithm in odeSolvers:
     solver = algorithm(force)
-
-    # Make a new plot and turn on the grid on the plot
-    ax = figure().add_subplot(111)
-    ax.grid(True)
-
-    text_position = 0.03
+    energy_array = []
+    coord_array = []
 
     # Cycle over time deltas and corresponding colors
-    for dt, color in zip(timedeltas, plotcolors):
+    for dt in timedeltas:
         # Run the simulation
         solver.run(x0, v0, dt, TimeLimit(timeLimit))
-
-        # Draw the displacement
-        plot(solver.t, solver.x, linewidth=1.0, color=color)
-
-        # Put a label on the plot which shows dt with the same color
-        # as the plot line
-        text(0.05, text_position, "dt = %s" % dt, color=color,
-             transform = ax.transAxes)
-        text_position += 0.05
-
-    # Put a few finishing touches on the plot for this solver
-    title('Simulated Oscillations (%s Method)' % solver.name())
-    xlabel('Time (s)')
-    ylabel('X (m)')
+        SolverError = Error(power, sping_constant, x0, v0, solver.x, solver.v, solver.t)
+        energy_error = SolverError.EnergyError()
+        coord_error = SolverError.CoordError()
+        energy_array = energy_array.append(energy_error)
+        coord_array = coord_array.append(coord_error)
     
-    #calculation for the report
-    SolverError = Error(power, spring_constant, x0, v0, solver.x, solver.v, solver.t)
-    print(SolverError.EnergyError())
-    print(SolverError.CoordError())
+plt.loglog(timedeltas, energy_array, linewidth=1.0, color=color)
     
 
 # Display the results

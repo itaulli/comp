@@ -4,6 +4,7 @@ from v3 import *
 from cpode import *
 from cpforces import *
 from pylab import *
+from RK2 import *
 import math
 
 # Convention for the coordinates:
@@ -27,7 +28,7 @@ omega = V3(0.0, 0.0, 1.0)
 Fm = MagnusForce(S0, omega)
 
 # Prepare the ODE solver
-golfBall = EulerSolver(Fg + Fd + Fm, m)
+golfBall = RK2(Fg + Fd + Fm, m)
 
 # Initial conditions
 x0 = V3(0.0, 0.0, 0.0)

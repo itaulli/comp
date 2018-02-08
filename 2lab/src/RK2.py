@@ -17,4 +17,7 @@ class RK2(cpode.OdeSolver):
     def _step(self, dt, t, x, v):
         halfstep = dt/2.0
         k1x, k1v = self.f(t, x, v)
-        dx = dt*
+        k2x, k2v = self.f(t+halfstep, x+halfstep*k1x, v+halfstep*k1v)
+        dx = dt*k2x
+        dv = dt*k2v
+        return dx, dv
