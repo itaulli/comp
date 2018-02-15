@@ -1,0 +1,27 @@
+!    -*- f90 -*-
+! Note: the context of this file is case sensitive.
+
+python module quasi_random ! in 
+    interface  ! in :quasi_random
+        subroutine gosobl(quasi) ! in :quasi_random:quasi_random.f
+            double precision dimension(40),intent(out) :: quasi
+        end subroutine gosobl
+        subroutine insobl(flag,dimen,atmost,taus,quasi,maxs,iflag) ! in :quasi_random:quasi_random.f
+            integer dimension(2),intent(out) :: flag
+            integer,intent(in) :: dimen
+            integer,intent(in) :: atmost
+            integer,intent(out) :: taus
+            double precision dimension(40),intent(out) :: quasi
+            integer,intent(out) :: maxs
+            integer,intent(in) :: iflag
+        end subroutine insobl
+        subroutine sgolo2(quasi) ! in :quasi_random:quasi_random.f
+            double precision dimension(40),intent(out) :: quasi
+        end subroutine sgolo2
+        subroutine sinlo2(dim,skip,iflag) ! in :quasi_random:quasi_random.f
+            integer,intent(in) :: dim
+            integer,intent(in) :: skip
+            integer,intent(in) :: iflag
+        end subroutine sinlo2
+    end interface 
+end python module quasi_random
