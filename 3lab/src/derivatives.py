@@ -1,7 +1,7 @@
 """
 Created on Thu Feb  8 14:15:47 2018
 Author: Ian Taulli
-Discription:
+Discription: impliments functions for finding derivatives
 """
 import numpy as np
 
@@ -32,5 +32,5 @@ def RelativeError(experiment, truth):
     error = np.zeros(len(T))
     assert len(E)==len(T), "input lists must have the same length"
     for entry in zip(E,T):
-        error = abs(E-T)/abs(T)
+        error = abs(E-T)/(1+abs(T))
     return error   

@@ -1,7 +1,7 @@
 """
 Created: Wed Feb  7 21:10:00 2018
 Author: Ian Taulli
-Description:
+Description: plots the error for different ODE solving methods as a function of step size
 """
 import matplotlib.pyplot as plt
 from cpode import *

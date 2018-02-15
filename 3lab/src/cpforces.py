@@ -9,6 +9,7 @@ __date__ ="Jan 29 2018"
 
 import v3
 import math
+import numpy as np
 
 # Physical forces should behave like vectors. However, there is
 # a complication: a priori, we do not know the dimensionality of the
@@ -135,6 +136,21 @@ class QuadraticDrag(BasicForce):
         # bit of CPU time).
         return -0.5*self.C*self.A*self.rho*abs(v)*v
 
+class BulletDrag(BasicForce):
+    "Quadratic drag for objects moving near the speed of sound"
+    def __init__(self, frontalArea, airDensity):
+        self.A = frontalArea
+        self.rho = airDensity
+    def __call__(self, t, x, v):
+        M = abs(v)/340.0
+        if M <= 0.9:
+            C = 0.15
+        elif M > 0.9 and M <= 1.0:
+            C = 0.15 + 3*(M - 0.9)
+        else:
+            C = 0.45/np.sqrt(M)
+        return -0.5*C*self.A*self.rho*abs(v)*v
+        
 class GolfBallDrag(BasicForce):
     """
     Air drag acting on a golf ball using the model of Giordano

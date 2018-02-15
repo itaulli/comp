@@ -1,7 +1,7 @@
 """
 Created: Wed Feb  7 13:46:38 2018
 Author: Ian Taulli
-Description:
+Description: impliments different functions for finding errors
 """
 import numpy as np
 import cpode
