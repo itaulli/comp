@@ -17,20 +17,21 @@ seed(myseed)
 def pseudo_rand(Nmax):
     points = np.zeros(10)
     N = 0
-    while N < Nmax:
+    for i in range(Nmax):
         point = np.array(uniform(0.0, 1.0, 10))
         points = np.vstack((points,point))
-        N += 1
     points = points[1:]    
     return points
 
 #function which returns Nmax number of Sobol-random 10-dimensional points
 def sobol_rand(Nmax):
     sobol.init(10)
-    sequence = []
+    points = np.zeros(10)
     for i in range(Nmax):
-        sequence.append(sobol.next())
-    return np.array(sequence)
+        point = np.array(sobol.next())
+        points = np.vstack((points,point))
+    points = points[1:]
+    return points
 
 #funciton which does the approxamation and calculates the relavent parameters
 def mc_int(points):
