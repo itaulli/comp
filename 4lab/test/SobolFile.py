@@ -4,6 +4,8 @@ Author: Ian Taulli
 Description:
 """
 import numpy as np
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import os
 import struct
@@ -16,9 +18,11 @@ seed(myseed)
 def sobol_rand(Nmax):
     sobol.init(10)
     points = np.zeros(10)
-    for i in range(Nmax):
+    for i in range(int(Nmax)):
         point = np.array(sobol.next())
         points = np.vstack((points,point))
+        if i % 10000 == 0:
+            print('stacking number = {:d}'.format(i))
     points = points[1:]
     return points
 
@@ -44,7 +48,7 @@ def mc_int(points):
     return avg_fun, bias, std, pull
 
 
-squence = sobol_rand(2**17)
+sequence = sobol_rand(2**17)
 
 powers = (6,7,8,9,10,11,12,13,14,15,16,17)
 num_evals = np.power(2, powers)
@@ -56,6 +60,7 @@ for n in num_evals:
     approx, bias, std, pull = mc_int(points)
     n_error = abs(approx - truth)
     abs_error.append(n_error)
+    print('done with N = {:d}'.format(int(n)))
 
 plt.loglog(num_evals, abs_error)
 ax = plt.gca()
@@ -63,6 +68,4 @@ ax.set_title('Convergence for Quasi-MC Integration')
 ax.set_xlabel('number of points')
 ax.set_ylabel('absolute error')
 plt.savefig('Sobol_error.pdf')
-plt.close()
-    
-    
+plt.close() 
