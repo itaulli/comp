@@ -9,6 +9,7 @@ from numpy.random import uniform
 import os
 import struct
 from numpy.random import seed
+import sobol
 myseed = abs(struct.unpack('i', os.urandom(4))[0])
 seed(myseed)
 
@@ -22,6 +23,14 @@ def pseudo_rand(Nmax):
         N += 1
     points = points[1:]    
     return points
+
+#function which returns Nmax number of Sobol-random 10-dimensional points
+def sobol_rand(Nmax):
+    sobol.init(10)
+    sequence = []
+    for i in range(Nmax):
+        sequence.append(sobol.next())
+    return np.array(sequence)
 
 #funciton which does the approxamation and calculates the relavent parameters
 def mc_int(points):
