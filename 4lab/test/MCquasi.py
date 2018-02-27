@@ -7,12 +7,7 @@ import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-import os
-import struct
-from numpy.random import seed
 import sobol
-myseed = abs(struct.unpack('i', os.urandom(4))[0])
-seed(myseed)
 
 #function which returns Nmax number of Sobol-random 10-dimensional points
 def sobol_rand(Nmax):

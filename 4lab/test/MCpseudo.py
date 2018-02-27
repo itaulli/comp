@@ -4,6 +4,8 @@ Author: Ian Taulli
 Description:
 """
 import numpy as np
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from numpy.random import uniform
 import os
@@ -46,7 +48,6 @@ def mc_int(points):
 
 #tuple of N values to iterate over
 num_evals = (1e2, 3e2, 1e3, 3e3, 1e4, 3e4, 1e5)
-bin_nums = [10, 15, 20, 30, 40, 50, 50]
 
 #initialize a couple of arrays to store the plot points
 bias_plot = np.array([])
@@ -59,7 +60,7 @@ for k, n in enumerate(num_evals):
     pull_array = np.array([])
     
     #do the approximation a bunch of times and average out the results
-    for i in range(2):
+    for i in range(100):
         unpack = mc_int(pseudo_rand(n))
         bias_array = np.hstack((bias_array,unpack[1]))
         std_array = np.hstack((std_array,unpack[2]))
@@ -72,7 +73,7 @@ for k, n in enumerate(num_evals):
     
     #plot the pull histogram for this n before moving on to the next one
     plt.figure()
-    plt.hist(pull_array,bins=bin_nums[k],normed=1)
+    plt.hist(pull_array,bins=15,normed=1)
     ax = plt.gca()
     ax.grid(True)
     ax.set_title('Pull distribution N = {:d}'.format(int(n)))
