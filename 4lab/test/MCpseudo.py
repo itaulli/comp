@@ -73,7 +73,7 @@ for k, n in enumerate(num_evals):
     
     #plot the pull histogram for this n before moving on to the next one
     plt.figure()
-    plt.hist(pull_array,bins=15,normed=1)
+    plt.hist(pull_array,bins=10,normed=1)
     ax = plt.gca()
     ax.grid(True)
     ax.set_title('Pull distribution N = {:d}'.format(int(n)))
