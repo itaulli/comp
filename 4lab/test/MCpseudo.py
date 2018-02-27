@@ -9,17 +9,17 @@ from numpy.random import uniform
 import os
 import struct
 from numpy.random import seed
-import sobol
 myseed = abs(struct.unpack('i', os.urandom(4))[0])
 seed(myseed)
 
 #function which retruns Nmax number of random 10-dimensional points
 def pseudo_rand(Nmax):
     points = np.zeros(10)
-    N = 0
-    for i in range(Nmax):
+    for i in range(int(Nmax)):
         point = np.array(uniform(0.0, 1.0, 10))
         points = np.vstack((points,point))
+        if i % 10000 == 0 and i != 0:
+            print('stacking number = {:d}'.format(i))
     points = points[1:]    
     return points
 
@@ -36,17 +36,17 @@ def mc_int(points):
     avg_fun = np.sum(fun_array)/len(fun_array)
     avg_fun2 = np.sum(fun_array**2)/len(fun_array)
     
-    bias = np.sum(fun_array-truth)/len(fun_array)
+    bias = avg_fun-truth
     std = np.sqrt(np.sum((fun_array-avg_fun)**2)/len(fun_array))
     
     est_uncert = np.sqrt((avg_fun2-avg_fun**2)/len(fun_array))
-    pull = (fun_array-truth)/est_uncert
+    pull = (avg_fun-truth)/est_uncert
     
     return avg_fun, bias, std, pull
 
 #tuple of N values to iterate over
 num_evals = (1e2, 3e2, 1e3, 3e3, 1e4, 3e4, 1e5)
-bin_nums = [10, 20, 30, 50, 80, 100, 100]
+bin_nums = [10, 15, 20, 30, 40, 50, 50]
 
 #initialize a couple of arrays to store the plot points
 bias_plot = np.array([])
@@ -59,11 +59,7 @@ for k, n in enumerate(num_evals):
     pull_array = np.array([])
     
     #do the approximation a bunch of times and average out the results
-    if n == (1e2, 3e2, 1e3, 3e3, 1e4):
-        repeat = 100
-    else:
-        repeat = 5
-    for i in range(repeat):
+    for i in range(2):
         unpack = mc_int(pseudo_rand(n))
         bias_array = np.hstack((bias_array,unpack[1]))
         std_array = np.hstack((std_array,unpack[2]))
@@ -85,4 +81,26 @@ for k, n in enumerate(num_evals):
     plt.savefig('pull_hiso_{:d}.pdf'.format(int(n)))
     plt.close()
     print('done with N = {:d}'.format(int(n)))
+
+#plot the bias vs N
+plt.figure()
+plt.plot(num_evals, bias_plot)
+ax = plt.gca()
+ax.grid(True)
+ax.set_title('Average Bias Over All Trials')
+ax.set_xlabel('number of function evaluations per trial')
+ax.set_ylabel('bias')
+plt.savefig('bias_plot.pdf')
+plt.close()
+
+#loglog plot of std vs N
+plt.figure()
+plt.semilogx(num_evals, std_plot)
+ax = plt.gca()
+ax.grid(True)
+ax.set_title('Average Standard Deviation Over All Trials')
+ax.set_xlabel('number of function evaluations per trial')
+ax.set_ylabel('standard deviation')
+plt.savefig('std_plot.pdf')
+plt.close()
     
