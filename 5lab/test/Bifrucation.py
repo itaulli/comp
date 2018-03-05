@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 from PendulumAngles import *
 from datetime import datetime
 import pandas as pd
+from multiprocessing import Pool
 
 startTime = datetime.now()
 
@@ -19,14 +20,16 @@ omegaD = 2.0/3.0
 periodD = 2*np.pi/omegaD
 period_times = np.arange(200*periodD,400*periodD,periodD)
 
+p = Pool(4)
+
 x_stack = np.array([])
 f_stack = np.array([])
 for f in Mag_F:
     print('doing F = {:.3f}'.format(f))
-    x_array = np.array([])
-    for theta in theta_0:
+    def funciton(theta):
         x = PendulumAngles(theta, f)
-        x_array = np.hstack((x_stack,x))
+        return x
+    x_array = np.array(p.map(function, theta_0))
     f_array = f*np.ones(len(x_array))
     x_stack = np.hstack((x_stack,x_array))
     f_stack = np.hstack((f_stack,f_array))
