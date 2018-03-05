@@ -8,11 +8,11 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from PendulumAngles import *
-from datetime import datetime
+import time
 import pandas as pd
 from multiprocessing import Pool
 
-startTime = datetime.now()
+startTime = time.time()
 
 F_D = (0.5, 1.2)
 #F_D = (0.5, 1.2, 1.35, 1.44, 1.5)
@@ -50,4 +50,4 @@ plt.ylabel('angles')
 plt.savefig('test.pdf', format='pdf')
 plt.close()
 
-print(startTime - datetime.now())
+print('runtime (s) = {:d}'.format(startTime - time.time()))
