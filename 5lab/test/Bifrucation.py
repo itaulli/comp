@@ -26,7 +26,7 @@ def function(f):
         x_array = np.hstack((x_array,x))     
     return x_array
 
-p = Pool(2)
+p = Pool(4)
 data = p.map(function, F_D)
 x_raw = np.ravel(data)
 
@@ -50,4 +50,4 @@ plt.ylabel('angles')
 plt.savefig('test.pdf', format='pdf')
 plt.close()
 
-print('runtime (s) = {:d}'.format(startTime - time.time()))
+print('runtime (s) = {:.4f}'.format(startTime - time.time()))
