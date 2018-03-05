@@ -14,30 +14,29 @@ from multiprocessing import Pool
 
 startTime = datetime.now()
 
-F_D = (0.5, 1.2, 1.35, 1.44, 1.5)
+F_D = (0.5, 1.2)
+#F_D = (0.5, 1.2, 1.35, 1.44, 1.5)
 theta_0 = np.linspace(0, 1, 200)
 
 def function(f):
-    print('doing f = {:.4f}'.format(f))
+    print('doing f = {:.3f}'.format(f))
     x_array = np.array([])
-    points = np.array([0,0])
     for theta in theta_0:
         x = PendulumAngles(theta, f)
-        x_array = np.hstack((x_array,x))
-        for x in x_array:
-            point = [f, x]
-            points = np.vstack((points, point))
-    points = points[1:,:]
-    return points
+        x_array = np.hstack((x_array,x))     
+    return x_array
 
 p = Pool(2)
 data = p.map(function, F_D)
-lumpy = np.array(data)
-flat = np.ravel(lumpy)
-x_raw = flat[0::2]
-y_raw = flat[1::2]
+x_raw = np.ravel(data)
 
-df = pd.DataFrame({'x':x_raw, 'y':y_raw})
+f_array = np.zeros(len(x_raw))
+for i in range(len(F_D)):
+    n_each = int(len(x_raw)/len(F_D))
+    f_array[i*n_each:(i+1)*n_each] = F_D[i]
+    
+
+df = pd.DataFrame({'x':f_array, 'y':x_raw})
 no_doops = df.drop_duplicates()
 x_plot = np.asarray(no_doops['x'])
 y_plot = np.asarray(no_doops['y'])
