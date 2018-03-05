@@ -14,12 +14,11 @@ from PendulumAngles import *
 
 startTime = time.time()
 
-F_D = (0.5, 1.2)
+F_D = np.arange(0.5,2.5001,0.0015)
 #F_D = (0.5, 1.2, 1.35, 1.44, 1.5)
 theta_0 = np.linspace(0, 1, 200)
 
 def function(f):
-    print('doing f = {:.3f}'.format(f))
     x_array = np.array([])
     for theta in theta_0:
         x = PendulumAngles(theta, f)
@@ -58,5 +57,3 @@ plt.xlabel('magnitude F_D')
 plt.ylabel('angles')
 plt.savefig('test.pdf', format='pdf')
 plt.close()
-
-print('runtime (s) = {:.1f}'.format(abs(startTime - time.time())))
