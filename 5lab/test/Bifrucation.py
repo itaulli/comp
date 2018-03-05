@@ -14,8 +14,8 @@ from PendulumAngles import *
 
 startTime = time.time()
 
-#F_D = (0.5, 1.2)
-F_D = (0.5, 1.2, 1.35, 1.44, 1.5)
+F_D = (0.5, 1.2)
+#F_D = (0.5, 1.2, 1.35, 1.44, 1.5)
 theta_0 = np.linspace(0, 1, 200)
 
 def function(f):
@@ -41,8 +41,17 @@ no_doops = df.drop_duplicates()
 x_plot = np.asarray(no_doops['x'])
 y_plot = np.asarray(no_doops['y'])
 
-plt.figure()
-#plt.ylim((0.3,0.4))
+plt.figure(figsize=(80,80))
+
+SMALL_SIZE = 50
+MEDIUM_SIZE = 80
+BIGGER_SIZE = 120
+plt.rc('axes', titlesize=BIGGER_SIZE)
+plt.rc('axes', labelsize=MEDIUM_SIZE)    
+plt.rc('xtick', labelsize=SMALL_SIZE)    
+plt.rc('ytick', labelsize=SMALL_SIZE)    
+plt.rc('figure', titlesize=BIGGER_SIZE)
+
 plt.plot(x_plot,y_plot,'b,') #places a pixel ',' to mark each point
 plt.title('Pendulum Bifrucation')
 plt.xlabel('magnitude F_D')
