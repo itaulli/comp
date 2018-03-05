@@ -7,10 +7,10 @@ import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-from PendulumAngles import *
 import time
 import pandas as pd
 from multiprocessing import Pool
+from PendulumAngles import *
 
 startTime = time.time()
 
@@ -41,13 +41,13 @@ no_doops = df.drop_duplicates()
 x_plot = np.asarray(no_doops['x'])
 y_plot = np.asarray(no_doops['y'])
 
-plt.figure(figsize=(80,80))
+plt.figure()
 #plt.ylim((0.3,0.4))
-plt.plot(x_plot,y_plot,'k,') #places a pixel ',' to mark each point
+plt.plot(x_plot,y_plot,'b,') #places a pixel ',' to mark each point
 plt.title('Pendulum Bifrucation')
 plt.xlabel('magnitude F_D')
 plt.ylabel('angles')
 plt.savefig('test.pdf', format='pdf')
 plt.close()
 
-print('runtime (s) = {:.4f}'.format(startTime - time.time()))
+print('runtime (s) = {:.1f}'.format(abs(startTime - time.time())))
