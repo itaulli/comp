@@ -14,27 +14,30 @@ from multiprocessing import Pool
 
 startTime = datetime.now()
 
-Mag_F = (0.5, 1.2, 1.35, 1.44, 1.5)
+F_D = (0.5, 1.2, 1.35, 1.44, 1.5)
 theta_0 = np.linspace(0, 1, 200)
-omegaD = 2.0/3.0
-periodD = 2*np.pi/omegaD
-period_times = np.arange(200*periodD,400*periodD,periodD)
 
-p = Pool(4)
-
-x_stack = np.array([])
-f_stack = np.array([])
-for f in Mag_F:
-    print('doing F = {:.3f}'.format(f))
-    def funciton(theta):
+def function(f):
+    print('doing f = {:.4f}'.format(f))
+    x_array = np.array([])
+    points = np.array([0,0])
+    for theta in theta_0:
         x = PendulumAngles(theta, f)
-        return x
-    x_array = np.array(p.map(function, theta_0))
-    f_array = f*np.ones(len(x_array))
-    x_stack = np.hstack((x_stack,x_array))
-    f_stack = np.hstack((f_stack,f_array))
+        x_array = np.hstack((x_array,x))
+        for x in x_array:
+            point = [f, x]
+            points = np.vstack((points, point))
+    points = points[1:,:]
+    return points
 
-df = pd.DataFrame({'x':f_stack, 'y':x_stack})
+p = Pool(2)
+data = p.map(function, F_D)
+lumpy = np.array(data)
+flat = np.ravel(lumpy)
+x_raw = flat[0::2]
+y_raw = flat[1::2]
+
+df = pd.DataFrame({'x':x_raw, 'y':y_raw})
 no_doops = df.drop_duplicates()
 x_plot = np.asarray(no_doops['x'])
 y_plot = np.asarray(no_doops['y'])
