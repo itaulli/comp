@@ -14,8 +14,8 @@ from multiprocessing import Pool
 
 startTime = time.time()
 
-F_D = (0.5, 1.2)
-#F_D = (0.5, 1.2, 1.35, 1.44, 1.5)
+#F_D = (0.5, 1.2)
+F_D = (0.5, 1.2, 1.35, 1.44, 1.5)
 theta_0 = np.linspace(0, 1, 200)
 
 def function(f):
