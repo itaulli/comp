@@ -12,7 +12,7 @@ from multiprocessing import Pool
 def function(ratio):
     temp1 = [0,0]
     temp2 = [0,0]
-    for y in np.linspace(0.1,.9,8):
+    for y in np.linspace(0.1,0.9,10):
         for i in range(1000):
             y=ratio*y*(1-y) #the fractal mapping itself
             if i > 800: #allow some iterations for the fractal to come to its fixed point
@@ -22,7 +22,14 @@ def function(ratio):
     temp2 = temp2[1:,:]
     return temp2
 
-ratios = np.linspace(3.56,3.6,1000)
+def justx(ratio):
+    points = np.ravel(function(ratio))
+    xvals = points[1::2]
+    return xvals
+
+#part3    
+
+ratios = np.linspace(3.4,3.8,1000)
 p = Pool(10)
 data = p.map(function, ratios)
 
@@ -43,26 +50,43 @@ plt.plot(x_plot,y_plot,'k,') #places a pixel ',' to mark each point
 plt.title('Logistic Map')
 plt.xlabel('ratio')
 plt.ylabel('population')
-plt.savefig('test.pdf', format='pdf')
-plt.close()
+#plt.savefig('test.pdf', format='pdf')
+#plt.close()
 
 '''
-plt.figure(figsize=(20,20))
-xmin = 0.9
-xmax = 4.1
-number_of_x_cells = 1000
-number_of_y_cells = 800
-ymin = 0
-ymax = 1
-cells = imageArray2d(x_plot, y_plot, number_of_x_cells, xmin, xmax, number_of_y_cells, ymin, ymax)
-range_ratio = (xmax - xmin)*1.0/(ymax - ymin)
-plt.imshow(cells, cmap=plt.cm.binary, origin='lower',
-       interpolation='nearest', extent=(xmin, xmax, ymin, ymax),
-       aspect=number_of_y_cells*range_ratio/number_of_x_cells)
-ax = plt.gca()
-ax.set_title('Logistic Map')
-ax.set_xlabel('ratio')
-ax.set_ylabel('population')
-plt.savefig('test.pdf')
+#part2
+
+xvals1 = justx(3.3)
+xvals2 = justx(3.8)
+diff1 = np.zeros(len(xvals1))
+diff2 = np.zeros(len(xvals1))
+n = np.arange(800,800+len(xvals1)-2)
+for i in np.arange(1,len(xvals1)-1):
+    diff1[i] = abs(xvals1[i+1]-xvals1[i])
+    diff2[i] = abs(xvals2[i+1]-xvals2[i])
+diff1 = diff1[1:-1]
+diff2 = diff2[1:-1]
+plt.figure(figsize=(10,10))
+plt.semilogy(n,diff1,label='3.3')
+plt.semilogy(n,diff2,label='3.8')
+plt.title('Population Values vs Iteration Number')
+plt.xlabel('iteration')
+plt.ylabel('absolute difference between iterations')
+plt.legend()
+plt.savefig('part1point2.pdf')
 plt.close()
+'''
+'''
+#part1
+n = np.arange(1,100)
+i=0
+for ratio in (0.5,2.8,3.3,3.5,3.8,3.828427):
+    plt.figure()
+    plt.plot(n,justx(ratio),'b')
+    plt.title('Part 1.1 for ratio = {:.4f}'.format(ratio))
+    plt.xlabel('iteration')
+    plt.ylabel('population')
+    plt.savefig('part1point1_{:d}.pdf'.format(i))
+    plt.close()
+    i+=1
 '''

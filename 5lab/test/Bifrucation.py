@@ -16,7 +16,7 @@ startTime = time.time()
 
 F_D = np.arange(0.5,2.5,0.0015)
 #F_D = (0.5, 1.2)
-theta_0 = np.linspace(0, 1, 200)
+theta_0 = np.linspace(0, 1, 100)
 
 def function(f):
     x_array = np.array([])
