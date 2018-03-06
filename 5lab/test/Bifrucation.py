@@ -14,8 +14,8 @@ from PendulumAngles import *
 
 startTime = time.time()
 
-F_D = np.arange(0.5,2.5001,0.0015)
-#F_D = (0.5, 1.2, 1.35, 1.44, 1.5)
+F_D = np.arange(0.5,2.5,0.0015)
+#F_D = (0.5, 1.2)
 theta_0 = np.linspace(0, 1, 200)
 
 def function(f):
