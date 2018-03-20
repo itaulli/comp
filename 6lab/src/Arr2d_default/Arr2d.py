@@ -111,13 +111,16 @@ class Arr2d(_object):
     __swig_destroy__ = _Arr2d.delete_Arr2d
     __del__ = lambda self: None
 
-    def GS(self, input: 'double *') -> "double *":
+    def GS(self, input: 'double *') -> "double":
         return _Arr2d.Arr2d_GS(self, input)
 
-    def SOR(self, Niter_: 'int', omega_: 'double') -> "void":
-        return _Arr2d.Arr2d_SOR(self, Niter_, omega_)
+    def SOR(self) -> "void":
+        return _Arr2d.Arr2d_SOR(self)
 
-    def convert(self, reverseRowNumbers: 'bool const'=False) -> "PyObject *":
+    def exampleCalculate(self) -> "void":
+        return _Arr2d.Arr2d_exampleCalculate(self)
+
+    def convert(self, reverseRowNumbers: 'bool'=False) -> "PyObject *":
         return _Arr2d.Arr2d_convert(self, reverseRowNumbers)
 Arr2d_swigregister = _Arr2d.Arr2d_swigregister
 Arr2d_swigregister(Arr2d)

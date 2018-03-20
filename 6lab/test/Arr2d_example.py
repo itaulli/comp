@@ -9,6 +9,7 @@ a = Arr2d(na)
 if array_equal(na, a.convert()):
     print("Numpy array is identical to the one stored in Arr2d")
 
+'''
 # Illustrate internal calculations
 a = Arr2d(100, 100)
 a.exampleCalculate()
@@ -25,3 +26,4 @@ ax.xaxis.set_label_position('top')
 fig.colorbar(mshow, aspect=10)
 
 show()
+'''

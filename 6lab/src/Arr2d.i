@@ -30,10 +30,10 @@ import_array();
 
 // Finally, wrap the Arr2d class
 %{
-#include "Arr2d.hh"
+#include "Arr2d.cpp"
 %}
 
-%include "Arr2d.hh"
+%include "Arr2d.cpp"
 
 // Clear replacements of existingData, nrows, ncols.
 // This can be useful if we have more files to wrap.
