@@ -5,7 +5,7 @@
 PYTHON_INCLUDE_DIR = /usr/local/anaconda3/include/python3.6m
 NUMPY_INCLUDE_DIR := $(shell python3 -c "import numpy; print(numpy.get_include())")
 
-OFILES = LaxAdvectionSolver1d.o CPInitialValueSolver.o WaveSolver2d.o
+OFILES = LaxAdvectionSolver1d.o CPInitialValueSolver.o WaveSolver2d.o Leapfrog.o
 HFILES = $(OFILES:.o=.hh)
 
 INCLUDES = -I$(PYTHON_INCLUDE_DIR) -I$(NUMPY_INCLUDE_DIR) -I.

@@ -1,13 +1,9 @@
 #!/usr/bin/env python
 """
-This script solves the advection equation and animates 1-d wave motion
-using matplotlib
+All the initial values are copied from your file. I used the Advection
+solver to get the first step, then used the Leapfrog method to get the
+video going.
 """
-
-__author__="Igor Volobouev (i.volobouev@ttu.edu)"
-__version__="0.3"
-__date__ ="March 16 2016"
-
 from pylab import *
 from wave_utils import *
 from CPInitialValue import *
@@ -33,26 +29,31 @@ dt = dt_factor*abs(dx/c)
 # Total number of time steps for the simulation
 maxsteps = int(4*(string_length+dx)/(c*dt))
 
-# Create the PDE solver. The following boundary conditions
-# could be interesting:
-# boundary_type = 0: the string is fixed at the edges
-# boundary_type = 1: periodic boundary conditions
-# boundary_type = 2: the string is free at the edges
-boundary_type = 0
+#use advection to get the first step
+#boundary_type:
+#0->fixed ends
+#1->periodic
+#2->free ends
+boundary_type = 1
 solver = LaxAdvectionSolver1d(n_spatial_points, c, dt, dx, boundary_type)
 
-# Set up the initial values for the solver
 initial_values = triangle_wave(x, 1.0, 3.0, 2.0)
-# initial_values = rectangle_wave(x, 1.0, 3.0, 2.0)
-# initial_values = gaussian_wave(x, 1.0, 3.0, 1.0)
 solver.setInitialValues(initial_values)
+
+solver.step()
+next_values = solver.convert()
+
+#switch over to the leapfrog method
+solver = Leapfrog(n_spatial_points, c, dt, dx, boundary_type)
+solver.setInitialValues(initial_values, 0)
+solver.setInitialValues(next_values, 1)
 
 # Plot for the waveform
 ax = figure().add_subplot(111)
 ax.grid(True)
 line, = plot(x, initial_values, linewidth=3)
 axis([0.0, string_length, -1.2, 1.2])
-title('Advection Equation Waveform')
+title('Leapfrog Equation Waveform')
 xlabel('X')
 ylabel('Displacement')
 timeLabel = ax.text(0.4, 0.15, "t = 0 s",
