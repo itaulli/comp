@@ -28,6 +28,9 @@
 %{
 #include "SiteSampler.hh"
 #include "CPP11Random.hh"
+#include "Cluster.hh"
+#include "Walker.hh"
+#include "Simulation.hh"
 %}
 
 // Constructor of the "SiteSampler" class includes an array argument.
@@ -38,3 +41,6 @@
 
 %include "SiteSampler.hh"
 %include "CPP11Random.hh"
+%include "Cluster.hh"
+%include "Walker.hh"
+%include "Simulation.hh"

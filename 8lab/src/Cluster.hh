@@ -17,7 +17,7 @@ public:
 
     // Object called radius that can be read and set
 
-    double current_radius = 0.0;
+    double currentR_ = 0.0;
 
     // Checks wheter the given location has a filled cell
     // in the four cardinal directions
@@ -45,5 +45,5 @@ private:
 
     double* memory_;
     unsigned nBuffers_;
-    int half_size;
+    int halfsize_;
 };

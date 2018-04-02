@@ -1,7 +1,7 @@
 #include "SiteSampler.hh"
 #include "CPP11Random.hh"
 
-class Walker : public SiteSampler, public CPP11Random
+class Walker
 {
 public:
 

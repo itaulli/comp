@@ -29,8 +29,8 @@ Cluster::Cluster(const unsigned size, const unsigned nBuffers)
         memory_[i] = 0.0
     }
         result_ = getMemoryBuffer(0);
-        half_size = size_/2 + 1;
-        result_[idx(half_size, half_size)] = 1.0;
+        halfsize_ = size_/2;
+        result_[idx(halfsize_, halfsize_)] = 1.0;
     }
 }
 
