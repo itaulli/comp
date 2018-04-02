@@ -22,4 +22,4 @@ private:
     int startingJ_;
     int halfsize_;
     double counter_;
-}
+};

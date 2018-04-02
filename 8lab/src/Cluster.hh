@@ -17,7 +17,7 @@ public:
 
     // Object called radius that can be read and set
 
-    double currentR_ = 0.0;
+    double currentR_;
 
     // Checks wheter the given location has a filled cell
     // in the four cardinal directions
@@ -33,7 +33,7 @@ protected:
     double* getMemoryBuffer(unsigned bufferNumber) const;
 
     inline unsigned long arrLen() const
-        {return static_cast<unsigned long>(size*size);}
+        {return static_cast<unsigned long>(size_*size_);}
 
     const unsigned size_;
     double* result_;

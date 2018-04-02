@@ -140,6 +140,88 @@ class CPP11Random(_object):
 CPP11Random_swigregister = _dla.CPP11Random_swigregister
 CPP11Random_swigregister(CPP11Random)
 
+class Cluster(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, Cluster, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, Cluster, name)
+    __repr__ = _swig_repr
+
+    def __init__(self, size: 'unsigned int', NumberOfBuffers: 'unsigned int'=1):
+        this = _dla.new_Cluster(size, NumberOfBuffers)
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+
+    def convert(self, reverseRowNumbers: 'bool'=True) -> "PyObject *":
+        return _dla.Cluster_convert(self, reverseRowNumbers)
+    __swig_setmethods__["currentR_"] = _dla.Cluster_currentR__set
+    __swig_getmethods__["currentR_"] = _dla.Cluster_currentR__get
+    if _newclass:
+        currentR_ = _swig_property(_dla.Cluster_currentR__get, _dla.Cluster_currentR__set)
+
+    def isNear(self, i: 'int', j: 'int') -> "bool":
+        return _dla.Cluster_isNear(self, i, j)
+
+    def setCellValue(self, i: 'int', j: 'int', value: 'double') -> "void":
+        return _dla.Cluster_setCellValue(self, i, j, value)
+Cluster_swigregister = _dla.Cluster_swigregister
+Cluster_swigregister(Cluster)
+
+class Walker(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, Walker, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, Walker, name)
+    __repr__ = _swig_repr
+
+    def __init__(self, init_i: 'int', init_j: 'int', TransitionMatrix: 'int'=0):
+        this = _dla.new_Walker(init_i, init_j, TransitionMatrix)
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+    __swig_setmethods__["currentI_"] = _dla.Walker_currentI__set
+    __swig_getmethods__["currentI_"] = _dla.Walker_currentI__get
+    if _newclass:
+        currentI_ = _swig_property(_dla.Walker_currentI__get, _dla.Walker_currentI__set)
+    __swig_setmethods__["currentJ_"] = _dla.Walker_currentJ__set
+    __swig_getmethods__["currentJ_"] = _dla.Walker_currentJ__get
+    if _newclass:
+        currentJ_ = _swig_property(_dla.Walker_currentJ__get, _dla.Walker_currentJ__set)
+
+    def step(self) -> "void":
+        return _dla.Walker_step(self)
+    __swig_destroy__ = _dla.delete_Walker
+    __del__ = lambda self: None
+Walker_swigregister = _dla.Walker_swigregister
+Walker_swigregister(Walker)
+
+class Simulation(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, Simulation, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, Simulation, name)
+    __repr__ = _swig_repr
+
+    def __init__(self, size: 'unsigned int', TransitionMatrix: 'int'):
+        this = _dla.new_Simulation(size, TransitionMatrix)
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+
+    def walk(self) -> "void":
+        return _dla.Simulation_walk(self)
+
+    def distance(self, i: 'int', j: 'int') -> "double":
+        return _dla.Simulation_distance(self, i, j)
+    __swig_destroy__ = _dla.delete_Simulation
+    __del__ = lambda self: None
+Simulation_swigregister = _dla.Simulation_swigregister
+Simulation_swigregister(Simulation)
+
 # This file is compatible with both classic and new-style classes.
 
 
