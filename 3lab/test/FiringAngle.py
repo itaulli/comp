@@ -14,13 +14,13 @@ from scipy import optimize as so
 def max_range(theta):
     
     #mass of the projectile (kg)
-    m = 4e-3
+    m = 8.4e-3
     #initial velocity (m/s)
-    speed = 930
+    speed = 876.3
     #initial hieght (m)
     h0 = 1.0
     #cross-sectional area (m^2)
-    area = 2.45e-5
+    area = 3.3e-5
     #air density (kg/m^3)
     density = 1.2
     
@@ -52,14 +52,13 @@ def max_range(theta):
     roots = np.polynomial.polynomial.polyroots(coef)
     xmax = roots[2]+xcoords[-1]
     
-    return abs(xmax)
+    return xcoords, ycoords
 
 #makes a plot with some trajectories
-'''
-angles = np.arange(0.1, 0.9, 0.1)
-for angle in angles:
-    xcoords, ycoords = max_range(angle)
-    plt.plot(xcoords, ycoords, label=angle)
+
+angle = 0.0
+xcoords, ycoords = max_range(angle)
+plt.plot(xcoords, ycoords, label=angle)
 ax = plt.gca()
 ax.grid(True)
 ax.set_title('Example Trajectories')
@@ -68,7 +67,7 @@ ax.set_ylabel('height')
 ax.legend(title='angle')
 plt.savefig('test.pdf')
 plt.close()
-'''
+
 #prints a list of angles and their ranges
 '''
 angles = np.arange(0.4,0.65,0.01)
@@ -102,7 +101,7 @@ plt.savefig('test.pdf')
 plt.close()
 '''
 #Brent's method optimization
-
+'''
 def invert(x):
     return -1.0*max_range(x)
 bracket = (0.5,0.6)
@@ -110,4 +109,4 @@ angle = so.brent(invert, brack=bracket, tol=0.06)
 frac = float(np.pi/angle)
 deg = angle*180/np.pi
 print('theta = pi/{:.3f} or {:.2f} degrees'.format(frac, deg))
-
+'''

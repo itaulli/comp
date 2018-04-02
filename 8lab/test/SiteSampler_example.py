@@ -36,6 +36,11 @@ ycoords = [y,]
 # Create generator of random numbers
 gen = dla.CPP11Random()
 
+site = sampler.sample(gen())
+print(site)
+
+
+'''
 # Perform a random walk. Operator "//" is used to perform integer division.
 nsteps = 1000
 for i in range(nsteps):
@@ -53,3 +58,4 @@ title("Random Walk Trajectory")
 xlabel("X")
 ylabel("Y")
 show()
+'''
