@@ -26,10 +26,8 @@ rmax = np.sqrt(nx**2+ny**2)
 cluster = dla.Cluster(size)
 gen = dla.CPP11Random()
 
-for i in range(1,10):
-    cluster.setCellValue(5+i, 5)
-'''
-while(cluster.getR() <= 0.5*size):
+for i in range(5):
+#while(cluster.getR() <= 0.5*size):
     phi0 = 2*np.pi*gen()
     radius0 = (rfactor/2.0)*(cluster.getR() + rmax)
     i0 = int(size + radius0*np.sin(phi0))
@@ -37,10 +35,11 @@ while(cluster.getR() <= 0.5*size):
 
     walker = dla.Walker(parray)
     walker.setPos(i0, j0)
+    cluster.setCellValue(walker.getI(), walker.getJ())
 
-    sim = dla.Simulation(rfactor, gen)
-    if(sim.walk(walker, cluster)): print(cluster.getR())
-'''
+    #sim = dla.Simulation(rfactor, gen)
+    #if(sim.walk(walker, cluster)): print(cluster.getR())
+
 
 result = cluster.convert()
 
