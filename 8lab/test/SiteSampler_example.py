@@ -68,8 +68,8 @@ for n in nsteps:
             dis_x.append(xcoords[i+1]-xcoords[i])
             dis_y.append(ycoords[i+1]-ycoords[i])
 
-        for i in range(len(dis_x)):
-            dist = np.sqrt(dis_x[i]**2+dis_y[i]**2)
+        for i in range(len(xcoords)):
+            dist = np.sqrt(xcoords[i]**2+ycoords[i]**2)
             dist_list.append(dist)
     
         mean_dist.append(sum(dist_list)/len(dist_list))
