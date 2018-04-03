@@ -36,7 +36,7 @@ for i in range(5):
     walker = dla.Walker(parray)
     walker.setPos(i0, j0)
     cluster.setCellValue(walker.getI(), walker.getJ())
-
+    
     #sim = dla.Simulation(rfactor, gen)
     #if(sim.walk(walker, cluster)): print(cluster.getR())
 
@@ -51,3 +51,4 @@ ax.set_ylabel('row number')
 fig.colorbar(mshow, aspect=10)
 plt.savefig('test.pdf')
 plt.close()
+
