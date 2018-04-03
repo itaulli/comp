@@ -59,7 +59,7 @@ for n in nsteps:
         dis_x.append(xcoords[i+1]-xcoords[i])
         dis_y.append(ycoords[i+1]-ycoords[i])
 
-    for i in range(len(dis_x)
+    for i in range(len(dis_x)):
         dist = np.sqrt(dis_x[i]**2+dis_y[i]**2)
         dist_list.append(dist)
     
