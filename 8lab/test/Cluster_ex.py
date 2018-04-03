@@ -18,7 +18,7 @@ P3 = ((0.7071, 0.0, 1.0, 0.0,  0.7071),
 
 parray = np.array(P1, 'float')
 
-size = 20
+size = 200
 rfactor = 4.0
 nx, ny = parray.shape
 rmax = np.sqrt(nx**2+ny**2)
