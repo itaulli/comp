@@ -4462,6 +4462,52 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_Cluster_isFilled(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Cluster *arg1 = (Cluster *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:Cluster_isFilled",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Cluster, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Cluster_isFilled" "', argument " "1"" of type '" "Cluster *""'"); 
+  }
+  arg1 = reinterpret_cast< Cluster * >(argp1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Cluster_isFilled" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Cluster_isFilled" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    try {
+      result = (bool)(arg1)->isFilled(arg2,arg3);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_Cluster_setCellValue(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Cluster *arg1 = (Cluster *) 0 ;
@@ -5033,6 +5079,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"delete_Cluster", _wrap_delete_Cluster, METH_VARARGS, NULL},
 	 { (char *)"Cluster_convert", _wrap_Cluster_convert, METH_VARARGS, NULL},
 	 { (char *)"Cluster_isNear", _wrap_Cluster_isNear, METH_VARARGS, NULL},
+	 { (char *)"Cluster_isFilled", _wrap_Cluster_isFilled, METH_VARARGS, NULL},
 	 { (char *)"Cluster_setCellValue", _wrap_Cluster_setCellValue, METH_VARARGS, NULL},
 	 { (char *)"Cluster_getCounter", _wrap_Cluster_getCounter, METH_VARARGS, NULL},
 	 { (char *)"Cluster_getR", _wrap_Cluster_getR, METH_VARARGS, NULL},

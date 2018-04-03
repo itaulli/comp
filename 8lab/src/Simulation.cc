@@ -10,7 +10,7 @@ bool Simulation::walk(Walker walker, Cluster* cluster)
     {
         walker.step((*gen_)());
        
-        if((*cluster).dist(walker.getI(), walker.getJ()) < (*cluster).getSize()/2)
+        if((*cluster).dist(walker.getI(), walker.getJ()) <= (*cluster).getSize()/2)
         {
             if((*cluster).isNear(walker.getI(), walker.getJ()))
             {

@@ -20,7 +20,8 @@ public:
     // Checks wheter the given location has a filled cell
     // in the four cardinal directions
 
-    bool isNear(int i, int j); 
+    bool isNear(int i, int j);
+    bool isFilled(int i, int j); 
 
     //sets the given cell to the given value
 

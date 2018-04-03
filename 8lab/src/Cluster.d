@@ -81,9 +81,8 @@ Cluster.o: Cluster.cc /usr/include/stdc-predef.h \
  /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
  /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
  /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
- /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h \
- /usr/include/c++/4.8.2/utility /usr/include/c++/4.8.2/bits/stl_relops.h \
- Cluster.hh /usr/local/anaconda3/include/python3.6m/Python.h \
+ /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h Cluster.hh \
+ /usr/local/anaconda3/include/python3.6m/Python.h \
  /usr/local/anaconda3/include/python3.6m/patchlevel.h \
  /usr/local/anaconda3/include/python3.6m/pyconfig.h \
  /usr/local/anaconda3/include/python3.6m/pymacconfig.h \

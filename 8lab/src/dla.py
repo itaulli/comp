@@ -162,6 +162,9 @@ class Cluster(_object):
     def isNear(self, i: 'int', j: 'int') -> "bool":
         return _dla.Cluster_isNear(self, i, j)
 
+    def isFilled(self, i: 'int', j: 'int') -> "bool":
+        return _dla.Cluster_isFilled(self, i, j)
+
     def setCellValue(self, i: 'int', j: 'int') -> "bool":
         return _dla.Cluster_setCellValue(self, i, j)
 

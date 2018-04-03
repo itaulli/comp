@@ -1,7 +1,6 @@
 #include <cassert>
 #include <stdexcept>
 #include <cmath>
-#include <utility>
 
 #include "Cluster.hh"
 
@@ -93,10 +92,20 @@ double* Cluster::getMemoryBuffer(const unsigned bufferNumber) const
 
 bool Cluster::isNear(int i, int j)
 {
-    if (result_[idx(i+1, j)] != 0.0) {return true;}
-    else if (result_[idx(i-1, j)] != 0.0) {return true;}
-    else if (result_[idx(i, j+1)] != 0.0) {return true;}
-    else if (result_[idx(i, j-1)] != 0.0) {return true;}
+    if (dist(i,j) < halfsize_ - 1)
+    {
+        if (result_[idx(i+1, j)] != 0.0) {return true;}
+        else if (result_[idx(i-1, j)] != 0.0) {return true;}
+        else if (result_[idx(i, j+1)] != 0.0) {return true;}
+        else if (result_[idx(i, j-1)] != 0.0) {return true;}
+        else {return false;}
+    }
+    else {return false;}
+}
+
+bool Cluster::isFilled(int i, int j)
+{
+    if (result_[idx(i,j)] != 0.0) {return true;}
     else {return false;}
 }
 
@@ -109,7 +118,7 @@ bool Cluster::setCellValue(int i, int j)
     result_[idx(i, j)] = ++counter_;
     
     const double R = dist(i, j);
-    currentR_ = std::max(currentR_, R);
+    currentR_ = (R > currentR_) ? R:currentR_;
     return true;
 }
 
