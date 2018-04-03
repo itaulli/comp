@@ -153,19 +153,29 @@ class Cluster(_object):
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
+    __swig_destroy__ = _dla.delete_Cluster
+    __del__ = lambda self: None
 
     def convert(self, reverseRowNumbers: 'bool'=True) -> "PyObject *":
         return _dla.Cluster_convert(self, reverseRowNumbers)
-    __swig_setmethods__["currentR_"] = _dla.Cluster_currentR__set
-    __swig_getmethods__["currentR_"] = _dla.Cluster_currentR__get
-    if _newclass:
-        currentR_ = _swig_property(_dla.Cluster_currentR__get, _dla.Cluster_currentR__set)
 
     def isNear(self, i: 'int', j: 'int') -> "bool":
         return _dla.Cluster_isNear(self, i, j)
 
-    def setCellValue(self, i: 'int', j: 'int', value: 'double') -> "void":
-        return _dla.Cluster_setCellValue(self, i, j, value)
+    def setCellValue(self, i: 'int', j: 'int') -> "bool":
+        return _dla.Cluster_setCellValue(self, i, j)
+
+    def getCounter(self) -> "unsigned long":
+        return _dla.Cluster_getCounter(self)
+
+    def getR(self) -> "double":
+        return _dla.Cluster_getR(self)
+
+    def dist(self, i: 'int', j: 'int') -> "double":
+        return _dla.Cluster_dist(self, i, j)
+
+    def getSize(self) -> "int":
+        return _dla.Cluster_getSize(self)
 Cluster_swigregister = _dla.Cluster_swigregister
 Cluster_swigregister(Cluster)
 
@@ -176,23 +186,27 @@ class Walker(_object):
     __getattr__ = lambda self, name: _swig_getattr(self, Walker, name)
     __repr__ = _swig_repr
 
-    def __init__(self, init_i: 'int', init_j: 'int', TransitionMatrix: 'int'=0):
-        this = _dla.new_Walker(init_i, init_j, TransitionMatrix)
+    def __init__(self, probabilities: 'double const *'):
+        this = _dla.new_Walker(probabilities)
         try:
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
-    __swig_setmethods__["currentI_"] = _dla.Walker_currentI__set
-    __swig_getmethods__["currentI_"] = _dla.Walker_currentI__get
-    if _newclass:
-        currentI_ = _swig_property(_dla.Walker_currentI__get, _dla.Walker_currentI__set)
-    __swig_setmethods__["currentJ_"] = _dla.Walker_currentJ__set
-    __swig_getmethods__["currentJ_"] = _dla.Walker_currentJ__get
-    if _newclass:
-        currentJ_ = _swig_property(_dla.Walker_currentJ__get, _dla.Walker_currentJ__set)
 
-    def step(self) -> "void":
-        return _dla.Walker_step(self)
+    def step(self, rnd: 'double') -> "void":
+        return _dla.Walker_step(self, rnd)
+
+    def setPos(self, i: 'int', j: 'int') -> "void":
+        return _dla.Walker_setPos(self, i, j)
+
+    def getI(self) -> "int":
+        return _dla.Walker_getI(self)
+
+    def getJ(self) -> "int":
+        return _dla.Walker_getJ(self)
+
+    def rmax(self) -> "double":
+        return _dla.Walker_rmax(self)
     __swig_destroy__ = _dla.delete_Walker
     __del__ = lambda self: None
 Walker_swigregister = _dla.Walker_swigregister
@@ -205,18 +219,15 @@ class Simulation(_object):
     __getattr__ = lambda self, name: _swig_getattr(self, Simulation, name)
     __repr__ = _swig_repr
 
-    def __init__(self, size: 'unsigned int', TransitionMatrix: 'int'):
-        this = _dla.new_Simulation(size, TransitionMatrix)
+    def __init__(self, rad_factor: 'double', gen: 'CPP11Random'):
+        this = _dla.new_Simulation(rad_factor, gen)
         try:
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
 
-    def walk(self) -> "void":
-        return _dla.Simulation_walk(self)
-
-    def distance(self, i: 'int', j: 'int') -> "double":
-        return _dla.Simulation_distance(self, i, j)
+    def walk(self, walker: 'Walker', cluster: 'Cluster') -> "bool":
+        return _dla.Simulation_walk(self, walker, cluster)
     __swig_destroy__ = _dla.delete_Simulation
     __del__ = lambda self: None
 Simulation_swigregister = _dla.Simulation_swigregister

@@ -1,42 +1,23 @@
 #include "Walker.hh"
+#include <cmath>
 
-enum{case0=0, case1, case2}
-
-Walker::Walker(int init_i, int init_j, int TransitionMatrix) 
-            : currentI_(init_i), currentJ_(init_j), probtype_(TransitionMatrix)
+Walker::Walker(const double* probabilities, unsigned nrows, unsigned ncols) 
+            : currentI_(0), currentJ_(0), nx(ncols), ny(nrows), sample(probabilities, nrows*ncols)
 {
-    switch (probtype_)
-    {
-    case case0:
-    {
-        prob_array = {0.7071, 1.0, 0.7071, 
-                        1.0, 0.0, 1.0, 
-                      0.7071, 1.0, 0.7071};
-        Pxdim_ = 3;    
-    }
-    case case1:
-    {
-        prob_array = {0.5657, 1.0, 0.7071, 
-                        0.8, 0.0, 1.0, 
-                      0.5657, 1.0, 0.7071};
-        Pxdim_ = 3;
-    }
-    case case2:
-    {
-        prob_array = {0.7071, 0.0, 1.0, 0.0, 0.7071, 
-                        1.0, 0.0, 0.0, 0.0, 1.0, 
-                      0.7071, 0.0, 1.0, 0.0, 0.7071};
-        Pxdim_ = 5;
-    }
-    }
-
-    sampler = SiteSampler(prob_array);
-
+    rmax_ = hypot(ncols, nrows);
 }
 
-void Walker::step();
+void Walker::step(const double rnd)
 {
-    site = sampler.sample(CPP11Random());
-    currentI_ += (site / Pxdim) - 1;
-    currentJ_ += (site % Pxdim) - 1;
+    const int site = sample.sample(rnd);
+    const int k = site / nx;
+    const int m = site % nx;
+    currentI_ += (m - nx/2);
+    currentJ_ += (k - ny/2);
+}
+
+void Walker::setPos(const int i, const int j)
+{
+    currentI_ = i;
+    currentJ_ = j;
 }

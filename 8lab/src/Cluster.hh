@@ -1,3 +1,5 @@
+#ifndef CLUSTER_HH_
+#define CLUSTER_HH_
 // The Class which holds data about the cluster
 
 #include "Python.h"
@@ -11,13 +13,9 @@ public:
 
     Cluster(unsigned size, unsigned NumberOfBuffers = 1);
 
-    void ~Cluster();
+    ~Cluster();
 
     PyObject* convert(bool reverseRowNumbers = true) const;
-
-    // Object called radius that can be read and set
-
-    double currentR_;
 
     // Checks wheter the given location has a filled cell
     // in the four cardinal directions
@@ -26,14 +24,19 @@ public:
 
     //sets the given cell to the given value
 
-    void setCellValue(int i, int j, double value);
+    bool setCellValue(int i, int j);
 
+    inline unsigned long getCounter() const {return counter_;}
+    inline double getR() const {return currentR_;}
+    inline double dist(int i, int j) const {return hypot(i-halfsize_,j-halfsize_);}
+    inline int getSize() const {return size_;}
+    
 protected:
 
     double* getMemoryBuffer(unsigned bufferNumber) const;
 
     inline unsigned long arrLen() const
-        {return static_cast<unsigned long>(size_*size_);}
+        {return static_cast<unsigned long>(size_)*size_;}
 
     const unsigned size_;
     double* result_;
@@ -46,4 +49,9 @@ private:
     double* memory_;
     unsigned nBuffers_;
     int halfsize_;
+    double currentR_;
+    unsigned long counter_;
 };
+
+#endif //CLUSTER_HH_
+

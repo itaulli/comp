@@ -215,4 +215,5 @@ dla_wrap.o: dla_wrap.cc /usr/include/stdc-predef.h \
  /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/adxintrin.h \
  /usr/include/c++/4.8.2/bits/random.tcc /usr/include/c++/4.8.2/numeric \
  /usr/include/c++/4.8.2/bits/stl_numeric.h CPP11RandomWrapper.hh \
+ Cluster.hh Walker.hh Simulation.hh \
  /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/float.h

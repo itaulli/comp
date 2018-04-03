@@ -4,7 +4,7 @@
 PYTHON_INCLUDE_DIR = /usr/local/anaconda3/include/python3.6m
 NUMPY_INCLUDE_DIR := $(shell python -c "import numpy; print(numpy.get_include())")
 
-OFILES = SiteSampler.o
+OFILES = SiteSampler.o Walker.o Cluster.o Simulation.o
 HFILES = $(OFILES:.o=.hh)
 
 INCLUDES = -I$(PYTHON_INCLUDE_DIR) -I$(NUMPY_INCLUDE_DIR) -I.

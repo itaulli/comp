@@ -1,9 +1,11 @@
 #include <cassert>
 #include <stdexcept>
+#include <cmath>
+#include <utility>
 
 #include "Cluster.hh"
 
-#define PY_ARRAY_UNIQUE_SYMBOL Cluster_ARRAY_API
+#define PY_ARRAY_UNIQUE_SYMBOL dla_ARRAY_API
 #define NO_IMPORT_ARRAY
 
 #define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
@@ -16,8 +18,10 @@
 // the cell in the center of the grid
 
 Cluster::Cluster(const unsigned size, const unsigned nBuffers) 
-    : result_(0), size_(size), memory_(0), nBuffers_(nBuffers)
+    : size_(size), result_(0), memory_(0), nBuffers_(nBuffers)
 {
+    counter_ = 1;
+    
     const unsigned long len = arrLen()*nBuffers;
     if (len)
     {
@@ -26,7 +30,7 @@ Cluster::Cluster(const unsigned size, const unsigned nBuffers)
     const unsigned long bufLen = arrLen();
     for (unsigned long i=0; i<bufLen; ++i)
     {
-        memory_[i] = 0.0
+        memory_[i] = 0.0;
     }
         result_ = getMemoryBuffer(0);
         halfsize_ = size_/2;
@@ -87,18 +91,26 @@ double* Cluster::getMemoryBuffer(const unsigned bufferNumber) const
     return memory_ + arrLen()*bufferNumber;
 }
 
-bool isNear(int i, int j)
+bool Cluster::isNear(int i, int j)
 {
-    if (result_[idx(i+1, j)] != 0.0) {return true}
-    else if (result_[idx(i-1, j)] != 0.0) {return true}
-    else if (result_[idx(i, j+1)] != 0.0) {return true}
-    else if (result_[idx(i, j-1)] != 0.0) {return true}
-    else {return false}
+    if (result_[idx(i+1, j)] != 0.0) {return true;}
+    else if (result_[idx(i-1, j)] != 0.0) {return true;}
+    else if (result_[idx(i, j+1)] != 0.0) {return true;}
+    else if (result_[idx(i, j-1)] != 0.0) {return true;}
+    else {return false;}
 }
 
-void setCellValue(int i, int j, double value)
+bool Cluster::setCellValue(int i, int j)
 {
-    result_[idx(i, j)] = value
+    if (i < 0 || i >= static_cast<int>(size_)) {return false;}
+    if (j < 0 || j >= static_cast<int>(size_)) {return false;}
+    if (result_[idx(i, j)]) {return false;}
+
+    result_[idx(i, j)] = ++counter_;
+    
+    const double R = dist(i, j);
+    currentR_ = std::max(currentR_, R);
+    return true;
 }
 
 

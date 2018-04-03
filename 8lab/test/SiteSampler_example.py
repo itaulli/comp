@@ -26,7 +26,7 @@ a = array(p, 'float')
 ny, nx = a.shape
 
 # Create the sampler
-sampler = dla.SiteSampler(a.flatten())
+Walker = dla.Walker(a)
 
 # Starting point for the random walk
 x, y = 0, 0
@@ -36,21 +36,14 @@ ycoords = [y,]
 # Create generator of random numbers
 gen = dla.CPP11Random()
 
-site = sampler.sample(gen())
-print(site)
 
 
-'''
 # Perform a random walk. Operator "//" is used to perform integer division.
 nsteps = 1000
 for i in range(nsteps):
-    site = sampler.sample(gen())
-    k = site // nx
-    m = site % nx
-    x += (m - nx//2)
-    y += (k - ny//2)
-    xcoords.append(x)
-    ycoords.append(y)
+    Walker.step(gen())
+    xcoords.append(Walker.getI())
+    ycoords.append(Walker.getJ())
 
 # Display the trajectory
 plot(xcoords, ycoords)
@@ -58,4 +51,4 @@ title("Random Walk Trajectory")
 xlabel("X")
 ylabel("Y")
 show()
-'''
+

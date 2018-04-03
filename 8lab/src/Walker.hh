@@ -1,19 +1,29 @@
+#ifndef WALKER_HH_
+#define WALKER_HH_
+
+
 #include "SiteSampler.hh"
-#include "CPP11Random.hh"
 
 class Walker
 {
 public:
 
-    Walker(int init_i, int init_j, int TransitionMatrix = 0);
+    Walker(const double* probabilities, unsigned nrows, unsigned ncols);
 
+    void step(double rnd);
+    void setPos(int i, int j);
+    inline int getI() const {return currentI_;}
+    inline int getJ() const {return currentJ_;}
+    inline double rmax() const {return rmax_;}
+    
+private:
+
+    double rmax_;
     int currentI_;
     int currentJ_;
-
-    void step();
-
-protected:
-
-    double prob_array[];
-    int Pxdim_;
+    int nx;
+    int ny;
+    SiteSampler sample;
 };
+
+#endif //WALKER_HH_

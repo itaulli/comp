@@ -37,7 +37,8 @@
 // We will map this argument into a numpy array.
 %include "numpy.i"
 %numpy_typemaps(double, NPY_DOUBLE, unsigned)
-%apply (double* IN_ARRAY1, unsigned DIM1) {(const double* probabilities, unsigned size)};
+%apply (double* IN_ARRAY1, int DIM1) {(const double* probabilities, unsigned size)};
+%apply (double* IN_ARRAY2, int DIM1, int DIM2) {(const double* probabilities, unsigned nrows, unsigned ncols)};
 
 %include "SiteSampler.hh"
 %include "CPP11Random.hh"

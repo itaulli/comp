@@ -1,25 +1,22 @@
+#ifndef SIMULATION_HH_
+#define SIMULATION_HH_
+
 #include "Cluster.hh"
 #include "CPP11Random.hh"
 #include "Walker.hh"
-#include <math.h>
 
 class Simulation
 {
 public:
 
-    Simulation(unsigned size, int TransitionMatrix);
+    Simulation(double rad_factor, CPP11Random* gen);
  
-    void walk();
-    double distance(int i, int j);
+    bool walk(Walker walker, Cluster* cluster);
 
 private:
 
-    double PI_;
-    double maxR_;
-    double startingR_;
-    double startingPhi_;
-    int startingI_;
-    int startingJ_;
-    int halfsize_;
-    double counter_;
+    double rfactor_;
+    CPP11Random* gen_;
 };
+
+#endif //SIMULATION_HH_
