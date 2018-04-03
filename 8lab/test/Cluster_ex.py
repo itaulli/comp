@@ -18,7 +18,7 @@ P3 = ((0.7071, 0.0, 1.0, 0.0,  0.7071),
 
 parray = np.array(P1, 'float')
 
-size = 200
+size = 20
 rfactor = 4.0
 nx, ny = parray.shape
 rmax = np.sqrt(nx**2+ny**2)
@@ -26,7 +26,10 @@ rmax = np.sqrt(nx**2+ny**2)
 cluster = dla.Cluster(size)
 gen = dla.CPP11Random()
 
-while(cluster.getR() < 0.4*size):
+for i in range(1,10):
+    cluster.setCellValue(5+i, 5)
+'''
+while(cluster.getR() <= 0.5*size):
     phi0 = 2*np.pi*gen()
     radius0 = (rfactor/2.0)*(cluster.getR() + rmax)
     i0 = int(size + radius0*np.sin(phi0))
@@ -37,6 +40,7 @@ while(cluster.getR() < 0.4*size):
 
     sim = dla.Simulation(rfactor, gen)
     if(sim.walk(walker, cluster)): print(cluster.getR())
+'''
 
 result = cluster.convert()
 
