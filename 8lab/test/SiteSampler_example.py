@@ -47,23 +47,31 @@ mean_vecy = []
 # Perform a random walk. Operator "//" is used to perform integer division.
 for n in nsteps:
     dist_list = []
+    dis_x = []
+    dis_y = []
+
     for i in range(n):
         Walker.step(gen())
         xcoords.append(Walker.getI())
         ycoords.append(Walker.getJ())
     
-    for i in range(len(xcoords)):
-        dist = np.sqrt(xcoords[i]**2+ycoords[i]**2)
+    for i in range(len(xcoords)-1):
+        dis_x.append(xcoords[i+1]-xcoords[i])
+        dis_y.append(ycoords[i+1]-ycoords[i])
+
+    for i in range(len(dis_x)
+        dist = np.sqrt(dis_x[i]**2+dis_y[i]**2)
         dist_list.append(dist)
     
     mean_dist.append(sum(dist_list)/len(dist_list))
 
-    mean_vecx.append(sum(xcoords)/len(xcoords))
-    mean_vecy.append(sum(ycoords)/len(ycoords))
+    mean_vecx.append(sum(dis_x)/len(dis_x))
+    mean_vecy.append(sum(dis_y)/len(dis_y))
 
 plt.figure()
 plt.plot(nsteps,mean_dist)
 ax = plt.gca()
+ax.grid()
 ax.set_title('mean distance')
 ax.set_xlabel('number of steps')
 ax.set_ylabel('distance')
@@ -73,6 +81,7 @@ plt.close()
 plt.figure()
 plt.plot(mean_vecx, mean_vecy, 'bo')
 ax = plt.gca()
+ax.grid()
 ax.set_title('mean displacement vectors (endpoints)')
 ax.set_xlabel('mean x component')
 ax.set_ylabel('mean y component')
