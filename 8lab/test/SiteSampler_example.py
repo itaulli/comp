@@ -43,33 +43,46 @@ nsteps = np.arange(100,1100,100)
 mean_dist = []
 mean_vecx = []
 mean_vecy = []
+plot_dist = []
+plot_vecx = []
+plot_vecy = []
 
 # Perform a random walk. Operator "//" is used to perform integer division.
+
 for n in nsteps:
-    dist_list = []
-    dis_x = []
-    dis_y = []
+    mean_dist = []
+    mean_vecx = []
+    mean_vecy = []
+   
+    for i in range(10):
+        dist_list = []
+        dis_x = []
+        dis_y = []
 
-    for i in range(n):
-        Walker.step(gen())
-        xcoords.append(Walker.getI())
-        ycoords.append(Walker.getJ())
+        for i in range(n):
+            Walker.step(gen())
+            xcoords.append(Walker.getI())
+            ycoords.append(Walker.getJ())
     
-    for i in range(len(xcoords)-1):
-        dis_x.append(xcoords[i+1]-xcoords[i])
-        dis_y.append(ycoords[i+1]-ycoords[i])
+        for i in range(len(xcoords)-1):
+            dis_x.append(xcoords[i+1]-xcoords[i])
+            dis_y.append(ycoords[i+1]-ycoords[i])
 
-    for i in range(len(dis_x)):
-        dist = np.sqrt(dis_x[i]**2+dis_y[i]**2)
-        dist_list.append(dist)
+        for i in range(len(dis_x)):
+            dist = np.sqrt(dis_x[i]**2+dis_y[i]**2)
+            dist_list.append(dist)
     
-    mean_dist.append(sum(dist_list)/len(dist_list))
+        mean_dist.append(sum(dist_list)/len(dist_list))
 
-    mean_vecx.append(sum(dis_x)/len(dis_x))
-    mean_vecy.append(sum(dis_y)/len(dis_y))
+        mean_vecx.append(sum(dis_x)/len(dis_x))
+        mean_vecy.append(sum(dis_y)/len(dis_y))
+
+    plot_dist.append(sum(mean_dist)/len(mean_dist))
+    plot_vecx.append(sum(mean_vecx)/len(mean_vecx))
+    plot_vecy.append(sum(mean_vecy)/len(mean_vecy))
 
 plt.figure()
-plt.plot(nsteps,mean_dist)
+plt.plot(nsteps,plot_dist)
 ax = plt.gca()
 ax.grid()
 ax.set_title('mean distance')
@@ -79,7 +92,7 @@ plt.savefig('distance_plot.pdf')
 plt.close()
 
 plt.figure()
-plt.plot(mean_vecx, mean_vecy, 'bo')
+plt.plot(plot_vecx, plot_vecy, 'bo')
 ax = plt.gca()
 ax.grid()
 ax.set_title('mean displacement vectors (endpoints)')
